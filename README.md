@@ -8,3 +8,5 @@ Je pense utiliser ce projet pour découvrir une nouvelle techno, donc mes option
 - React
 - Angular
 - Express.js (déjà vu)
+- Symfony
+- Next.js
