@@ -1,6 +1,7 @@
 # Idées
 
 
+###Idée 1 : le lien comme seul donnée
 Pour ce qui est de ma vision du site, je suis sur de partie sur quelque chose de simple visuellement qui permettra de faire tout ce qu'il veut pour n'importe qui
 , sans avoir à doué en Info. Voici un exemple sans l'UI d'une moyenne qu'un utilisateur pourra créer pour ensuite partager à ses amis qui n'auront qu'à mettre leurs 
 notes, le reste étant calculé autaumatiquement par le site.
@@ -35,3 +36,12 @@ mais qui est compréhensible d'après mes propres règles du genre :
 - le nom et le coef sont géré ainsi "xxxY,Y" où "xxx" est le nom de la matière en minuscule et "Y,Y" est le coef (à virgule ou non)
 - "&" symbolise différentes notes dans un même UE
 - si après "/^^xxxY" (où "xxxY" est le nom et le coef) il y a un autre "/^^", alors cela signifit que ce n'est pas un UE mais une note
+
+
+###Idée 2 : une base de donnée 
+
+
+
+### Idée 3 : une fusion des 2 idées
+
+**J'ai décidé finalement de faire les 2 idées précédentes**.
