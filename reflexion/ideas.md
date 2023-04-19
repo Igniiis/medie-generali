@@ -1,7 +1,6 @@
 # Idées
 
-
-### Idée 1 : le lien comme seul donnée
+## Base du projet
 Pour ce qui est de ma vision du site, je suis sur de partie sur quelque chose de simple visuellement qui permettra de faire tout ce qu'il veut pour n'importe qui
 , sans avoir à doué en Info. Voici un exemple sans l'UI d'une moyenne qu'un utilisateur pourra créer pour ensuite partager à ses amis qui n'auront qu'à mettre leurs 
 notes, le reste étant calculé autaumatiquement par le site.
@@ -25,6 +24,8 @@ Stage | 2
 EPS | 0.5
 ```
 
+
+## Idée 1 : le lien comme seul donnée
 Ma première vision du site était de faire ce projet sans aucune bdd. On créer une structure à notre bon vouloir sur le site avec l'UI, comme dans l'exemple, et 
 nous obtenions une url qui contenait toutes les informations nécessaires à la recréation de la moyenne par le site **lui-même** automatique en lisant simplement l'url.
 Pour l'exemple, on aurait pu penser à une url du type :
@@ -39,7 +40,7 @@ mais qui est compréhensible d'après mes propres règles du genre :
 - si après "/^^xxxY" (où "xxxY" est le nom et le coef) il y a un autre "/^^", alors cela signifit que ce n'est pas un UE mais une note
 
 
-### Idée 2 : une base de donnée 
+## Idée 2 : une base de donnée 
 Je pense que ca sera trop compliqué de faire l'idée 1 car l'url a un nombre de caractères qui est certe grand mais fini (2048). Si des personnes veulent calculer de longues moyennes avec énormément de matières différentes et/ou avec des noms à ralonges, on pourra facielement arriver au bout. <br>
 De plus, un autre problème m'est apparu : dans le cas de plusieurs groupes (UE) les uns dans les autres, l'url ne pourra pas gérer cette sous liaison car la complexité est trop elevé.
 
@@ -47,7 +48,7 @@ Je pense donc partir sur une base de donnée très simple (3 ou 4 tables), avec 
 Une matière pourra être directement lié au lien, ce qui signifit qu'elle ne fait partie d'aucun UE. Elle pourra aussi avoir l'id de l'UE dans lequelle elle se trouve.
 Un UE pourra être directement lié au lien ou être elle-même lié à un autre UE, ce qui signifirait que cette UE est un sous-groupe. Un UE pourra possédé un noubre infini de matière et/ou de groupes(UE) mais devra forcément possédé au moins une matière.
 
-### Idée 3 : une fusion des 2 idées
+## Idée 3 : une fusion des 2 idées
 
 **J'ai décidé finalement de faire les 2 idées précédentes**.
 En effet le problème de l'idée 2 est sa gestion, la première idée permettait de ne faire qu'un simple site alors que l'idée 2 demande de faire une base de donnée accessible à tous pour que chacun puisse créer son propre calcul de moyenne.<br>
@@ -57,3 +58,14 @@ Pour séparer les 2 offres, nous fairons une vérification lors de la création 
 Cette inscription permettra la vérification du caractère humain de l'utilisateur pour éviter tous DDOS ou attaque par spam. Il faudra, pour les mêmes raisons, limiter à un nombre donnés le nombre de calculateur généré par heure et/ou jour et/ou par semaine.
 
 **Bonus**: un utilisateur inscrit pourra par la même occasion modifié ses calculateurs et/ou les supprimer à son bon vouloir.
+
+
+
+# Plan
+1. Je commence par créer l'html du site, permettant de manipuler le tout
+2. Création de la partie sans utilisateur, avec les liens (cf : idée 1)
+3. Mise en rout du site sans bdd sur le serveur 
+4. Recherche d'offre intéressante d'hébergement pour un site web **avec une bdd**
+5. Mise en place de la base de donnée de l'idée 2
+6. Création de la partie utilisateur dans la bdd et sur le site web
+7. Mise en route du **site final** sur le serveur
