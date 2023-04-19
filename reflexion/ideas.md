@@ -62,10 +62,16 @@ Cette inscription permettra la vérification du caractère humain de l'utilisate
 
 
 # Plan
-1. Je commence par créer l'html du site, permettant de manipuler le tout
-2. Création de la partie sans utilisateur, avec les liens (cf : idée 1)
-3. Mise en rout du site sans bdd sur le serveur 
-4. Recherche d'offre intéressante d'hébergement pour un site web **avec une bdd**
-5. Mise en place de la base de donnée de l'idée 2
-6. Création de la partie utilisateur dans la bdd et sur le site web
-7. Mise en route du **site final** sur le serveur
+1. Je commence par créer l'html du site, permettant de manipuler le tout 🔨
+2. Création de la partie sans utilisateur, avec les liens (cf : idée 1) 🟥
+3. Mise en rout du site sans bdd sur le serveur 🟥
+4. Recherche d'offre intéressante d'hébergement pour un site web **avec une bdd** 🟥
+5. Mise en place de la base de donnée de l'idée 2 🟥
+6. Création de la partie utilisateur dans la bdd et sur le site web 🟥
+7. Mise en route du **site final** sur le serveur 🟥
+
+<!---
+to do 🟥
+in progress 🔨
+done ✅
+--->
