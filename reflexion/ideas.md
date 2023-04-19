@@ -1,7 +1,7 @@
 # Idées
 
 
-###Idée 1 : le lien comme seul donnée
+### Idée 1 : le lien comme seul donnée
 Pour ce qui est de ma vision du site, je suis sur de partie sur quelque chose de simple visuellement qui permettra de faire tout ce qu'il veut pour n'importe qui
 , sans avoir à doué en Info. Voici un exemple sans l'UI d'une moyenne qu'un utilisateur pourra créer pour ensuite partager à ses amis qui n'auront qu'à mettre leurs 
 notes, le reste étant calculé autaumatiquement par le site.
