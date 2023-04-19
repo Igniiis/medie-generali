@@ -28,6 +28,7 @@ EPS | 0.5
 Ma première vision du site était de faire ce projet sans aucune bdd. On créer une structure à notre bon vouloir sur le site avec l'UI, comme dans l'exemple, et 
 nous obtenions une url qui contenait toutes les informations nécessaires à la recréation de la moyenne par le site **lui-même** automatique en lisant simplement l'url.
 Pour l'exemple, on aurait pu penser à une url du type :
+
 https://medie-generali.fr/^^Literraire2/histoire2&francais2&philo1/^^Sciences2/proba2&stat3/^^langues1/allemand1&anglais2&chinois0,5/^^Stage2/^^EPS0,5
 
 Ce n'est qu'un exemple avec des règles inventés sur le tas qui ne sont pas définitives mais je compte en effet générer une url en fonction de ce que l'utilisateur à mis
