@@ -7,7 +7,6 @@ note : "Medie generali" veut dire "moyenne général" en italien, voilà ;)
 Je pense utiliser ce projet pour découvrir une nouvelle techno, donc mes options sont les suivantes :
 - React  ✔️
 - Angular
-- Express.js (déjà vu)
 - Symfony
 - Next.js
 - Vue.js  
