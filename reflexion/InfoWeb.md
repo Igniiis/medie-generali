@@ -13,3 +13,63 @@ In terms of serverless architectures, you could consider using a platform like A
 You could also consider using a static site generator like Gatsby or Next.js to generate your web app's HTML and JavaScript files ahead of time. This approach can make your app faster to load and more SEO-friendly, since all the content is available on the initial page load.
 
 Overall, there are many different options for building a web app without a database. The best choice will depend on your specific requirements and technical expertise.
+
+
+
+## Exemple code
+First, you will need to define the structure of your URL so that it contains all the information that your app needs to display. For example, if your app is a weather app, your URL might look something like this:
+
+```php
+https://my-weather-app.com?location=New+York&units=fahrenheit
+```
+
+This URL contains two parameters: location and units. These parameters will be used by your app to display the weather information for the specified location in the specified units.
+
+Here's an example React component that extracts these parameters from the URL and displays the weather information:
+
+```php
+import React, { useState, useEffect } from "react";
+
+function WeatherApp() {
+  const [location, setLocation] = useState("");
+  const [units, setUnits] = useState("");
+  const [weatherData, setWeatherData] = useState(null);
+
+  useEffect(() => {
+    // Extract the location and units from the URL
+    const params = new URLSearchParams(window.location.search);
+    const location = params.get("location");
+    const units = params.get("units");
+
+    // Update the state with the extracted values
+    setLocation(location);
+    setUnits(units);
+
+    // Fetch the weather data based on the extracted values
+    fetch(`https://api.openweathermap.org/data/2.5/weather?q=${location}&units=${units}&appid=YOUR_API_KEY`)
+      .then(response => response.json())
+      .then(data => setWeatherData(data));
+  }, []);
+
+  if (!weatherData) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div>
+      <h1>Weather in {weatherData.name}</h1>
+      <p>Temperature: {weatherData.main.temp} {units}</p>
+      <p>Humidity: {weatherData.main.humidity}%</p>
+    </div>
+  );
+}
+
+export default WeatherApp;
+
+```
+
+This component uses the useState and useEffect hooks to manage its state and fetch the weather data. The useEffect hook runs once when the component mounts and extracts the location and units parameters from the URL using the URLSearchParams API. It then fetches the weather data from the OpenWeatherMap API using these parameters and updates the state with the fetched data.
+
+The component then uses conditional rendering to display a loading message while the data is being fetched, and the weather information once the data is available.
+
+Note that you will need to replace YOUR_API_KEY with your own API key from OpenWeatherMap. Also, this is just a simple example to get you started, and you may need to modify it to fit your specific requirements.
