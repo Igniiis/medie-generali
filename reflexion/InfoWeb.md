@@ -211,7 +211,14 @@ function GradeCalculator() {
   const subjects = subjectsParam
     ? subjectsParam.split(",").map(param => {
         const [name, coeff] = param.split(":");
-        return { name, coeff: parseInt(coeff) };
+        let cNumb;
+        if(coeff.includes('!')){
+          cNumb = parseFloat(coeff.replace('!','.'));
+        }else{
+          cNumb = parseInt(coeff);
+        }
+        console.log(cNumb);
+        return { name, coeff: cNumb };
       })
     : [];
 
