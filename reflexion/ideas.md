@@ -48,6 +48,8 @@ Je pense donc partir sur une base de donnée très simple (3 ou 4 tables), avec 
 Une matière pourra être directement lié au lien, ce qui signifit qu'elle ne fait partie d'aucun UE. Elle pourra aussi avoir l'id de l'UE dans lequelle elle se trouve.
 Un UE pourra être directement lié au lien ou être elle-même lié à un autre UE, ce qui signifirait que cette UE est un sous-groupe. Un UE pourra possédé un noubre infini de matière et/ou de groupes(UE) mais devra forcément possédé au moins une matière.
 
+**note post-text** : J'ai pu testé avec google trad, et l'url peut aller jusqu'à 6692 caractères, c'est déjà pas mal.
+
 ## Idée 3 : une fusion des 2 idées
 
 **J'ai décidé finalement de faire les 2 idées précédentes**.
