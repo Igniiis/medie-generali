@@ -16,7 +16,7 @@ Overall, there are many different options for building a web app without a datab
 
 
 
-## Exemple code
+## Exemple code météo
 First, you will need to define the structure of your URL so that it contains all the information that your app needs to display. For example, if your app is a weather app, your URL might look something like this:
 
 ```php
