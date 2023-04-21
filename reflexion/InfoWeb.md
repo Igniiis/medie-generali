@@ -273,3 +273,9 @@ To use this component, you would need to include the subjects parameter in the U
 https://example.com/grade-calculator?subjects=Math:4,English:3,Science:3,History:2,Art:2
 ```
 In this URL, the subjects parameter contains the list of subjects and their coefficients.
+
+
+## Tests Online
+
+Here is a website where you can simulate a react page and manipulate the code completely from the browser : <br>
+https://playcode.io/react
