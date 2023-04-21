@@ -27,7 +27,7 @@ This URL contains two parameters: location and units. These parameters will be u
 
 Here's an example React component that extracts these parameters from the URL and displays the weather information:
 
-```php
+```javascript
 import React, { useState, useEffect } from "react";
 
 function WeatherApp() {
@@ -73,3 +73,50 @@ This component uses the useState and useEffect hooks to manage its state and fet
 The component then uses conditional rendering to display a loading message while the data is being fetched, and the weather information once the data is available.
 
 Note that you will need to replace YOUR_API_KEY with your own API key from OpenWeatherMap. Also, this is just a simple example to get you started, and you may need to modify it to fit your specific requirements.
+
+## Code général
+
+```javascript
+import React, { useState, useEffect } from "react";
+
+function MyApp() {
+  const [param1, setParam1] = useState("");
+  const [param2, setParam2] = useState("");
+  const [param3, setParam3] = useState("");
+  const [data, setData] = useState(null);
+
+  useEffect(() => {
+    const params = new URLSearchParams(window.location.search);
+    const param1Value = params.get("param1");
+    const param2Value = params.get("param2");
+    const param3Value = params.get("param3");
+
+    setParam1(param1Value);
+    setParam2(param2Value);
+    setParam3(param3Value);
+
+    // fetch data using parameters
+    fetch(`https://api.example.com/data?param1=${param1Value}&param2=${param2Value}&param3=${param3Value}`)
+      .then(response => response.json())
+      .then(data => setData(data))
+      .catch(error => console.error(error));
+  }, []);
+
+  if (!data) {
+    return <div>Loading...</div>;
+  }
+
+  return (
+    <div>
+      <h1>{data.title}</h1>
+      <p>Param1: {param1}</p>
+      <p>Param2: {param2}</p>
+      <p>Param3: {param3}</p>
+      <p>{data.description}</p>
+    </div>
+  );
+}
+
+export default MyApp;
+
+```
