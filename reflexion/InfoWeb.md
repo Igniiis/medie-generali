@@ -198,3 +198,78 @@ This component defines an array of subjects with their coefficients, and uses th
 When the form is submitted, the handleSubmit function calculates the final grade using the entered marks and the coefficients of each subject. It then displays the final grade in an alert.
 
 Note that this is just a basic example to get you started, and you may need to modify it to fit your specific requirements. For example, you may want to add validation to the form to ensure that only valid marks are entered.
+
+## Second try at school subjects and their coefficients
+
+```javascript
+  import React, { useState } from "react";
+
+function GradeCalculator() {
+  // Retrieve the subjects and their coefficients from the URL
+  const urlParams = new URLSearchParams(window.location.search);
+  const subjectsParam = urlParams.get("subjects");
+  const subjects = subjectsParam
+    ? subjectsParam.split(",").map(param => {
+        const [name, coeff] = param.split(":");
+        return { name, coeff: parseInt(coeff) };
+      })
+    : [];
+
+  // Define the state for the marks of each subject
+  const [marks, setMarks] = useState(
+    subjects.reduce((acc, subject) => ({ ...acc, [subject.name]: "" }), {})
+  );
+
+  // Define the function to handle form submissions
+  const handleSubmit = event => {
+    event.preventDefault();
+
+    // Calculate the final grade using the marks and coefficients
+    const totalCoeff = subjects.reduce((acc, subject) => acc + subject.coeff, 0);
+    const totalGrade = subjects.reduce((acc, subject) => {
+      const mark = parseFloat(marks[subject.name]);
+      const coeff = subject.coeff;
+
+      return isNaN(mark) ? acc : acc + mark * coeff;
+    }, 0);
+
+    const finalGrade = totalGrade / totalCoeff;
+
+    // Display the final grade
+    alert(`Your final grade is ${finalGrade.toFixed(2)}`);
+  };
+
+  // Define the function to handle changes to the marks
+  const handleMarkChange = event => {
+    const { name, value } = event.target;
+    setMarks({ ...marks, [name]: value });
+  };
+
+  // Render the form
+  return (
+    <form onSubmit={handleSubmit}>
+      {subjects.map(subject => (
+        <div key={subject.name}>
+          <label>
+            {subject.name} ({subject.coeff})
+            <input type="text" name={subject.name} value={marks[subject.name]} onChange={handleMarkChange} />
+          </label>
+        </div>
+      ))}
+      <button type="submit">Calculate final grade</button>
+    </form>
+  );
+}
+
+export default GradeCalculator;
+```
+
+In this version of the component, we retrieve the subjects parameter from the URL and parse it into an array of subjects with their coefficients. We then use this array to define the state for the marks of each subject, and to render the form.
+
+When the form is submitted, the handleSubmit function calculates the final grade using the entered marks and the coefficients of each subject. It then displays the final grade in an alert.
+
+To use this component, you would need to include the subjects parameter in the URL, with the subjects and their coefficients represented as a comma-separated list of name:coeff pairs. Here's an example URL:
+```php
+https://example.com/grade-calculator?subjects=Math:4,English:3,Science:3,History:2,Art:2
+```
+In this URL, the subjects parameter contains the list of subjects and their coefficients.
