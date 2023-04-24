@@ -282,6 +282,18 @@ https://example.com/grade-calculator?subjects=Math:4,English:3,Science:3,History
 In this URL, the subjects parameter contains the list of subjects and their coefficients.
 
 
+## New way of thinking
+
+I have now this idea of a precise url that will allow every user to get precise grade with grouped-subjects thanks to this url system :
+```php
+https://example.com/grade-calculator?subjects=Math:4,English:3,Science:3,History:2,Art:2?groups=engineer:Math!Science~3,human%20sciences=English!History!Art~2
+```
+Here it completely new variable : 'groups'.
+The argument will be composed of different party :
+- 'group=Sub1!Sub2!Sub3' will be the the part where we define which subjects(subX) will part of this group
+- '~X' is the coefficient of this group overall (X is number)
+- ',' will be like for the first part, the separator between each group
+
 ## Tests Online
 
 Here is a website where you can simulate a react page and manipulate the code completely from the browser : <br>
