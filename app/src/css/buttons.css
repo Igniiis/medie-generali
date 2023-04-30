@@ -1,11 +1,66 @@
+/* Click Link button */
 .linkButton {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #0077cc;
+    color: #fff;
+    font-size: 16px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .linkButton:hover {
+    background-color: #005fa3;
+  }
 
-}
+/* Copy link button */
 
-.copyButton {
+.copyContainer {
+    display: flex;
+    align-items: center;
+  }
+  
+  #copyShowing {
+    flex: 1;
+    background-color: #f0f0f0;
+    color: #555;
+    border: none;
+    padding: 8px;
+    margin: 0;
+  }
+  
+  .copy-button {
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    padding: 8px;
+    margin: 0;
+    cursor: pointer;
+    vertical-align: middle;
+  }
+  
+  .copy-button:hover {
+    background-color: #0069d9;
+  }
+  
+  .copy-button:focus {
+    outline: none;
+  }
+  
+  .grayTextBox {
+    color: #ccc;
+    background-color: #f2f2f2;
+    border: none;
+    padding: 10px;
+    font-size: 16px;
+  }
+    
 
-}
-
+/* Add pair button */
 #addButton {
     background-color: #ffb703; 
     border: none;

@@ -12,6 +12,7 @@ interface FormValues {
 
 const Form = () => {
 
+  //for the css button color
   const [showButtons, setShowButtons] = useState(false);
 
   const [url,setUrlLoad] = useState('');
@@ -19,6 +20,7 @@ const Form = () => {
   const [values, setValues] = useState<FormValues>({});
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    //for the value of the differents matters
     const { name, value, dataset } = event.target;
     const index = dataset.index!;
     const newValue = {
@@ -26,6 +28,9 @@ const Form = () => {
       [name]: value
     };
     setValues({ ...values, [index]: newValue });
+
+    //for the color of the generate button
+    //TODO
   };
 
   //when you submit the code :
@@ -50,18 +55,15 @@ const Form = () => {
           t=true;
         }
         console.log(index);
-        url += values[index].matter+":"+values[index].coefficient.replace(',','|').replace('.','|');
+        url += values[index].matter+":"+values[index].coefficient.replace(',','!').replace('.','!');
       });
       const currentUrl = window.location.href;
 
       url = '?page=calculator&subjects=' + url;
-      console.log(url);
 
       setUrlLoad(url);
 
       setShowButtons(true);
-      //should do this :
-      //?subjects=Math:4,English:3,Science:3,History:2,Art:2 
     }
   };
 
@@ -102,13 +104,18 @@ const Form = () => {
           </div>
         );
       })}
-      <button type="button" id="addButton" onClick={addNewPair}>Add Matter</button>
-      <button type="submit">Generate</button>
-      {showButtons ? (
-        <OpenLink url={url} />
-      ) : (
-        null
-      )}
+      <div>
+        <button type="button" id="addButton" onClick={addNewPair}>Add Matter</button>
+        <button type="submit" >Generate</button>
+      </div>
+
+      <div>
+        {showButtons ? (
+          <OpenLink url={url} />
+        ) : (
+          null
+        )}
+      </div>
     </form>
   );
 };
