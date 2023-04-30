@@ -59,10 +59,9 @@ function GradeCalculator() {
     <form onSubmit={handleSubmit}>
       {subjects.map((subject) => (
         <div key={subject.name}>
-          <label>
-            {subject.name} ({subject.coeff})
-            <input type="text" name={subject.name} value={marks[subject.name]} onChange={handleMarkChange} />
-          </label>
+          <label htmlFor={subject.name} > {subject.name} ({subject.coeff}) </label>
+            <input type="number" name={subject.name} value={marks[subject.name]} onChange={handleMarkChange} />
+          
         </div>
       ))}
       <button type="submit">Calculate final grade</button>

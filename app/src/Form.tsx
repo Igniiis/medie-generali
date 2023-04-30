@@ -1,4 +1,8 @@
 import React, { useState } from "react";
+import '../src/css/buttons.css';
+import OpenLink from "./OpenLink";
+
+
 interface FormValues {
   [key: string]: {
     matter: string;
@@ -7,6 +11,11 @@ interface FormValues {
 }
 
 const Form = () => {
+
+  const [showButtons, setShowButtons] = useState(false);
+
+  const [url,setUrlLoad] = useState('');
+
   const [values, setValues] = useState<FormValues>({});
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -32,7 +41,7 @@ const Form = () => {
       // We do nothing
       console.log('no matters declared');
     }else{
-      let url = 'subjects=';
+      let url = '';
       let t = false;
       Object.keys(values).map((index) => {
         if(t){
@@ -43,8 +52,14 @@ const Form = () => {
         console.log(index);
         url += values[index].matter+":"+values[index].coefficient.replace(',','|').replace('.','|');
       });
+      const currentUrl = window.location.href;
+
+      url = '?page=calculator&subjects=' + url;
       console.log(url);
 
+      setUrlLoad(url);
+
+      setShowButtons(true);
       //should do this :
       //?subjects=Math:4,English:3,Science:3,History:2,Art:2 
     }
@@ -87,8 +102,13 @@ const Form = () => {
           </div>
         );
       })}
-      <button type="button" onClick={addNewPair}>Add Pair</button>
-      <button type="submit">Submit</button>
+      <button type="button" id="addButton" onClick={addNewPair}>Add Matter</button>
+      <button type="submit">Generate</button>
+      {showButtons ? (
+        <OpenLink url={url} />
+      ) : (
+        null
+      )}
     </form>
   );
 };

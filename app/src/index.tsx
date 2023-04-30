@@ -3,12 +3,16 @@ import ReactDOM from 'react-dom/client';
 import '../src/css/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
+import Header from './header';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
 root.render(
-<App />
+  <div>
+    <Header />
+    <App />
+  </div>
 );
 
 // If you want to start measuring performance in your app, pass a function
