@@ -43,7 +43,7 @@ const Search = () => {
 
       <div className="notes">
         <p>
-          <a href="http://localhost:3000/?page=calculator&subjects=Math:4,English:3,Science:3,History:2,Art:2&groups=engineer:Math!Science~3,human%20sciences:English!History!Art~2">link</a>
+          <a href="http://localhost:3000/?page=calculator&subjects=Probabilit%C3%A9%20Avanc%C3%A9es:1,Recherche%20Op%C3%A9rationnelle:1,Interface%20Homme%20Machine:1,Conception%20de%20Syst%C3%A8mes%20d%27Information:1,Compilation:1,Complexit%C3%A9%20algorithmique:1,Stage:1,Anglais:1,CHOI%20LV2:1,MTU:1&groups=Math%C3%A9matiques:Probabilit%C3%A9%20Avanc%C3%A9es!Recherche%20Op%C3%A9rationnelle~2,Informatique%201:Interface%20Homme%20Machine!Conception%20de%20Syst%C3%A8mes%20d%27Information~3,Informatique%202:Compilation!Complexit%C3%A9%20algorithmique~3,Stage:Stage~1,Transversale:Anglais!CHOI%20LV2!MTU~1">link</a>
             (to delete)
           <br/>
           <br/>
