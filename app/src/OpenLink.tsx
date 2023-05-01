@@ -15,7 +15,6 @@ function OpenLink({url} : OpenLinkProps){
   };
 
   return (
-    // <form action={url}>
     <div>
         <div className="linkContainer">
           <a href={url} className="linkButton" type="submit">Open calculator</a>

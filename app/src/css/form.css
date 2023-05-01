@@ -1,0 +1,21 @@
+.coeff {
+    display: flex;
+    align-items: center;
+    /* justify-content: space-between; */
+}
+
+.deleteButton {
+    background-color: #c1121f;
+    padding: 2%;
+    padding-left: 2.5%;
+    padding-right: 2.5%;
+    border-radius: 23%;
+    cursor: pointer;
+    margin-left: 9%;
+    margin-bottom: 20px;
+}
+
+.deleteButton:hover {
+    background-color: #e76f51;
+    transition: background-color 0.3s ease-in-out;   
+}

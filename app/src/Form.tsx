@@ -1,7 +1,9 @@
 import React, { useState } from "react";
 import '../src/css/buttons.css';
 import OpenLink from "./OpenLink";
-
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {faTrash} from '@fortawesome/free-solid-svg-icons';
+import '../src/css/form.css';
 
 interface FormValues {
   [key: string]: {
@@ -12,15 +14,11 @@ interface FormValues {
 
 const Form = () => {
 
-  //for the css button color
   const [showButtons, setShowButtons] = useState(false);
-
   const [url,setUrlLoad] = useState('');
-
   const [values, setValues] = useState<FormValues>({});
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    //for the value of the differents matters
     const { name, value, dataset } = event.target;
     const index = dataset.index!;
     const newValue = {
@@ -28,12 +26,8 @@ const Form = () => {
       [name]: value
     };
     setValues({ ...values, [index]: newValue });
-
-    //for the color of the generate button
-    //TODO
   };
 
-  //when you submit the code :
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
@@ -41,9 +35,7 @@ const Form = () => {
       (value) => !value.matter && !value.coefficient
     );
 
-    //preparation of the url :
     if(Object.keys(values).length === 0 || isEmpty){
-      // We do nothing
       console.log('no matters declared');
     }else{
       let url = '';
@@ -76,13 +68,22 @@ const Form = () => {
         coefficient: ""
       }
     });
+    setShowButtons(false);
+  };
+
+  const removeMatter = (name: string) => {
+    const filteredValues = Object.fromEntries(
+      Object.entries(values).filter(([_, value]) => value.matter !== name)
+    );
+    setValues(filteredValues);
+    setShowButtons(false);
   };
 
   return (
     <form onSubmit={handleSubmit}>
       {Object.keys(values).map((index) => {
         return (
-          <div key={index}>
+          <div key={index} className="wrapperMatter">
             <label htmlFor={`matter_${index}`}>Matter:</label>
             <input
               type="text"
@@ -91,16 +92,24 @@ const Form = () => {
               data-index={index}
               value={values[index] ? values[index].matter : ''}
               onChange={handleInputChange}
-            required />
+              required
+            />
+
             <label htmlFor={`coefficient_${index}`}>Coefficient:</label>
-            <input
-              type="number"
-              id={`coefficient_${index}`}
-              name="coefficient"
-              data-index={index}
-              value={values[index] ? values[index].coefficient : ''}
-              onChange={handleInputChange}
-            required />
+            <div className="coeff">
+                <input
+                type="number"
+                id={`coefficient_${index}`}
+                name="coefficient"
+                data-index={index}
+                value={values[index] ? values[index].coefficient : ''}
+                onChange={handleInputChange}
+                required
+              />
+              <div className="deleteButton" onClick={() => removeMatter(values[index].matter)}>
+                <FontAwesomeIcon icon={faTrash} />
+              </div>
+            </div>
           </div>
         );
       })}
