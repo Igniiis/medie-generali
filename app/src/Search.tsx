@@ -43,6 +43,10 @@ const Search = () => {
 
       <div className="notes">
         <p>
+          <a href="http://localhost:3000/?page=calculator&subjects=Math:4,English:3,Science:3,History:2,Art:2&groups=engineer:Math!Science~3,human%20sciences:English!History!Art~2">link</a>
+            (to delete)
+          <br/>
+          <br/>
           Note : you can use your copied link directly onto your browser to open the same window.
         </p>
       </div>

@@ -89,6 +89,7 @@ const Form = () => {
               type="text"
               id={`matter_${index}`}
               name="matter"
+              pattern="[^:=~]"
               data-index={index}
               value={values[index] ? values[index].matter : ''}
               onChange={handleInputChange}

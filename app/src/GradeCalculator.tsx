@@ -1,5 +1,15 @@
+/**
+ * @author Maxence Malleret
+ */
+
 import React, { useState } from "react";
 import '../src/css/App.css';
+
+interface Group {
+  name: string,
+  coef: string;
+  matters: Subject[];
+}
 
 interface Subject {
   name: string;
@@ -19,8 +29,23 @@ function GradeCalculator() {
         } else {
           cNumb = parseInt(coeff);
         }
-        console.log(cNumb);
         return { name, coeff: cNumb };
+      })
+    : [];
+
+  const groupsParam = urlParams.get('groups');
+  const groups: Group[] = groupsParam
+    ? groupsParam.split(",").map((param) => {
+
+        const [name, p] = param.split(":");
+
+        const [matters,coeff] = p.split("~");
+
+        const tabMatters = matters.split("!");
+
+        const filteredSubjects = subjects.filter(subject => tabMatters.includes(subject.name) );
+        
+        return {name:name,coef:coeff,matters:filteredSubjects};
       })
     : [];
 
@@ -34,16 +59,28 @@ function GradeCalculator() {
     event.preventDefault();
 
     // Calculate the final grade using the marks and coefficients
-    const totalCoeff = subjects.reduce((acc, subject) => acc + subject.coeff, 0);
-    const totalGrade = subjects.reduce((acc, subject) => {
-      const mark = parseFloat(marks[subject.name]);
-      const coeff = subject.coeff;
+    let totalGrade = 0;
+    let totalCoeff = 0;
+    
+    groups.forEach(group => {
+      const {coef, matters} = group;
+      let groupCoeff = 0;
+      let groupGrade = 0;
 
-      return isNaN(mark) ? acc : acc + mark * coeff;
-    }, 0);
+      matters.forEach(matter => {
+        const mark = parseFloat(marks[matter.name]);
+        groupGrade += mark*matter.coeff;
+        groupCoeff += matter.coeff;
+      })
+
+      const resultGroup = groupGrade/groupCoeff;
+
+      totalCoeff += parseFloat(coef);
+      totalGrade += resultGroup*parseFloat(coef);
+    })
+
 
     const finalGrade = totalGrade / totalCoeff;
-
     // Display the final grade
     alert(`Your final grade is ${finalGrade.toFixed(2)}`);
   };
@@ -57,11 +94,16 @@ function GradeCalculator() {
   // Render the form
   return (
     <form onSubmit={handleSubmit}>
-      {subjects.map((subject) => (
-        <div key={subject.name}>
-          <label htmlFor={subject.name} > {subject.name} ({subject.coeff}) </label>
-            <input type="number" name={subject.name} value={marks[subject.name]} onChange={handleMarkChange} />
-          
+
+      {groups.map((group) => (
+        <div key={group.name}>
+          <label className="groupName">{group.name} ({group.coef})</label>
+          {group.matters.map((subject) => (
+            <div key={subject.name}>
+              <label htmlFor={subject.name} > - {subject.name} ({subject.coeff}) </label>
+              <input type="number" name={subject.name} value={marks[subject.name]} onChange={handleMarkChange} />
+          </div>
+          ))}
         </div>
       ))}
       <button type="submit">Calculate final grade</button>
