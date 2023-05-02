@@ -12,7 +12,7 @@ interface FormValues {
   };
 }
 
-const Form = () => {
+const FormWithout = () => {
 
   const [showButtons, setShowButtons] = useState(false);
   const [url,setUrlLoad] = useState('');
@@ -130,4 +130,4 @@ const Form = () => {
   );
 };
 
-export default Form;
+export default FormWithout;

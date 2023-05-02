@@ -16,7 +16,7 @@ interface Subject {
   coeff: number;
 }
 
-function GradeCalculator() {
+function GradeCalculatorWith() {
   // Retrieve the subjects and their coefficients from the URL
   const urlParams = new URLSearchParams(window.location.search);
   const subjectsParam = urlParams.get("subjects");
@@ -111,4 +111,4 @@ function GradeCalculator() {
   );
 }
 
-export default GradeCalculator;
+export default GradeCalculatorWith;

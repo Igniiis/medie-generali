@@ -5,10 +5,17 @@ function Header() {
   return (
     <header>
       <nav>
-        <ul>
-          <li><a href='./?page=home'>Home</a></li>
-          <li><a href="./?page=generator">Create a grade calculator</a></li>
-          <li><a href="./?page=search">Open a grade</a></li>
+        <ul className='topList'>
+          <li className='topLine'><a href='./?page=home'>Home</a></li>
+          
+          <div className='show'>
+            <li className='topLine'><a id="generator">Create a grade calculator</a></li>
+            <ul className='list-categories'>
+                <li><a href="./?page=generator!with">with groups</a></li>
+                <li><a href="./?page=generator!without">without groups</a></li>
+            </ul>
+          </div>
+          <li className='topLine'><a href="./?page=search">Open a grade</a></li>
         </ul>
       </nav>
     </header>
