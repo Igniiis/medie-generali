@@ -4,10 +4,15 @@ import '../src/css/index.css';
 import App from './App';
 import reportWebVitals from './reportWebVitals';
 import Header from './header';
+import { languageGeneration } from './language';
 
 const root = ReactDOM.createRoot(
   document.getElementById('root') as HTMLElement
 );
+
+//Generate the website in the language of the browser
+//languageGeneration();
+
 root.render(
   <div>
     <Header />

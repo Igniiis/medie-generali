@@ -84,3 +84,9 @@
 #addButton:hover {
     background-color: #ACEDFF;
 }
+
+
+/* buttons of hide */
+.dropDown {
+  cursor: pointer;
+}

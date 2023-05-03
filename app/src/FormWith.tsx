@@ -3,6 +3,8 @@ import '../src/css/buttons.css';
 import OpenLink from "./OpenLink";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
+import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
+import { faEye } from '@fortawesome/free-solid-svg-icons';
 import '../src/css/form.css';
 
 interface Matter {
@@ -14,6 +16,7 @@ interface Group {
   name: string;
   coefficient: string;
   matters: Matter[];
+  visible: boolean;
 }
 
 interface FormValues {
@@ -21,14 +24,14 @@ interface FormValues {
 }
 
 const FormWith = () => {
-
   const [showButtons, setShowButtons] = useState(false);
   const [url,setUrlLoad] = useState('');
   const [values, setValues] = useState<FormValues>({
     groups: [{
       name: "",
       coefficient: "",
-      matters: [{ name: "", coefficient: "" }]
+      matters: [{ name: "", coefficient: "" }],
+      visible:true
     }]
   });
 
@@ -36,27 +39,46 @@ const FormWith = () => {
     const { name, value, dataset } = event.target;
     const groupIndex:number = Number(dataset.groupIndex!);
     const matterIndex = parseInt(dataset.matterIndex!, 10) as number;
+    
 
     const group = values.groups[groupIndex];
     const matter = group.matters[matterIndex];
 
-    const newMatter = {
-      ...matter,
-      [name]: value
-    };
 
-    const newMatters = [...group.matters];
-    newMatters[matterIndex] = newMatter;
+    let newGroup;
+    if(dataset.matterIndex){
+      const newMatter = {
+        ...matter,
+        [name]: value
+      };
 
-    const newGroup = {
-      ...group,
-      matters: newMatters
-    };
+      const newMatters = [...group.matters];
+      newMatters[matterIndex] = newMatter;
+
+      newGroup = {
+        ...group,
+        matters: newMatters
+      };
+    }else{
+      const newMatter = {
+        ...matter
+      };
+
+      const newMatters = [...group.matters];
+      newMatters[matterIndex] = newMatter;
+
+      newGroup = {
+        ...group,
+        [name]:value,
+        matters: newMatters
+      };
+
+    }
 
     const newGroups = [...values.groups];
     newGroups[groupIndex] = newGroup;
 
-    setValues({ ...values, groups: newGroups });
+    setValues({ ...values, groups: newGroups });    
   };
 
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
@@ -69,27 +91,46 @@ const FormWith = () => {
     if(values.groups.length === 0 || isEmpty){
       console.log('no matters or groups declared');
     }else{
-      let url = '';
-      let t = false;
-
-      values.groups.forEach((group, groupIndex) => {
-        group.matters.forEach((matter, matterIndex) => {
-          if(t){
-            url+= ',';
-          }else{
-            t=true;
-          }
-          url += group.name + '-' + matter.name + ":" + matter.coefficient.replace(',','!').replace('.','!');
-        });
+      let verif:boolean = true;
+      values.groups.forEach(group => {
+        if(group.matters.length===0 || group.matters[0].name==='' || group.matters[0].coefficient===''){
+          console.log('missing a matter');
+          verif = false;
+          return;
+        }
       });
 
-      const currentUrl = window.location.href;
+      
+      if(verif){
+        let url = '';
+        let t = false;
+        let groupUrl = '';
+        let matterUrl = '';
 
-      url = '?page=calculator&subjects=' + url;
+        //TODO
+        //update GradeCalculatorWith to respect THIS url + finish the generation of this specific url
+        //group url
+        //?page=calculator&groups=Science:math(1!5)|physic(4)~2,Human%20Sciences:English(2!5)|Art(3)~2!5
 
-      setUrlLoad(url);
+        values.groups.forEach((group, groupIndex) => {
+          group.matters.forEach((matter, matterIndex) => {
+            if(t){
+              url+= ',';
+            }else{
+              t=true;
+            }
+            url += group.name + '-' + matter.name + ":" + matter.coefficient.replace(',','!').replace('.','!');
+          });
+        });
 
-      setShowButtons(true);
+        const currentUrl = window.location.href;
+
+        url = '?page=calculator&subjects=' + url;
+
+        setUrlLoad(url);
+
+        setShowButtons(true);
+      }
     }
   };
 
@@ -97,7 +138,8 @@ const FormWith = () => {
     const newGroup: Group = {
       name: "",
       coefficient: "",
-      matters: [{ name: "", coefficient: "" }]
+      matters: [{ name: "", coefficient: "" }],
+      visible:true
     };
     setValues({
       ...values,
@@ -131,68 +173,112 @@ const FormWith = () => {
       groups: newGroups
     });
     
+    setShowButtons(false);
   };
+
+
+  const removeMatter = (name: string, groupIndex: number) => {
+    const group = values.groups[groupIndex];
+    const newMatters = group.matters.filter((matter) => matter.name !== name);
+    const newGroup = { ...group, matters: newMatters };
+    const newGroups = [...values.groups];
+    newGroups[groupIndex] = newGroup;
+    setValues({
+      ...values,
+      groups: newGroups
+    });
+
+    setShowButtons(false);
+  };
+
+  const switchVisibility = (groupIndex:number) => {
+    values.groups[groupIndex].visible = !values.groups[groupIndex].visible;
+
+    setValues({
+      ...values
+    });
+  }
+  
 
   return (
     <form className="form-with" onSubmit={handleSubmit}>
       {values.groups.map((group, groupIndex) => {
-        return (
+        return ( 
         <div key={groupIndex}>
-          <input
-            type="text"
-            name="name"
-            value={group.name}
-            placeholder="Group name"
-            data-group-index={groupIndex}
-            onChange={handleInputChange}
-            />
-          <input
-            type="text"
-            name="coefficient"
-            value={group.coefficient}
-            placeholder="Group coefficient"
-            data-group-index={groupIndex}
-            onChange={handleInputChange}
-            />
-          <div>
-            {group.matters.map((matter, matterIndex) => {
-              return (
-                <div key={matterIndex}>
-                  <input
-                    type="text"
-                    name="name"
-                    value={matter.name}
-                    placeholder="Matter name"
-                    data-group-index={groupIndex}
-                    data-matter-index={matterIndex}
-                    onChange={handleInputChange}
+          <div className="dropDown" onClick={() => switchVisibility(groupIndex)}>
+            <FontAwesomeIcon icon={faEyeSlash} style={{display : group.visible ? "block":"none"}}/>
+            <FontAwesomeIcon icon={faEye} style={{display : group.visible ? "none":"block"}}/>
+          </div>
+          <div className="groupWrapper" style={{display : group.visible ? "block":"none"}}>
+            <label htmlFor={`group_${groupIndex}`}>Group:</label>
+            
+            <input
+              className="GroupName"
+              id={`group_${groupIndex}`}
+              type="text"
+              name="name"
+              value={group.name}
+              placeholder="Group name"
+              data-group-index={groupIndex}
+              onChange={handleInputChange}
+              />
+            <input
+              type="text"
+              name="coefficient"
+              value={group.coefficient}
+              placeholder="Group coefficient"
+              data-group-index={groupIndex}
+              onChange={handleInputChange}
+              />
+            <div>
+              {group.matters.map((matter, matterIndex) => {
+                return (
+                  <div key={matterIndex}>
+                    <label className="subTitle" htmlFor={`matter_${matterIndex}`}>Matter's name:</label>
+                    <input
+                      id={`matter_${matterIndex}`}
+                      type="text"
+                      name="name"
+                      value={matter.name}
+                      placeholder="Matter name"
+                      data-group-index={groupIndex}
+                      data-matter-index={matterIndex}
+                      onChange={handleInputChange}
                     />
-                  <input
-                    type="text"
-                    name="coefficient"
-                    value={matter.coefficient}
-                    placeholder="Matter coefficient"
-                    data-group-index={groupIndex}
-                    data-matter-index={matterIndex}
-                    onChange={handleInputChange}
-                    />
-                </div>
-              );
-            })}
-        
-            <button
-              type="button"
-              onClick={() => addNewMatter(groupIndex)}
-              className="add-matter-btn" >
-              + Add Matter
-            </button>
-        
-            <button
-              type="button"
-              onClick={() => removeGroup(group.name)}
-              className="remove-group-btn" >
-              <FontAwesomeIcon icon={faTrash} />
-            </button>
+                    <label className="subTitle" htmlFor={`coeff_${matterIndex}`}>Matter's coefficient:</label>
+                    <div className="coeff">
+                      <input
+                        id={`coeff_${matterIndex}`}
+                        type="text"
+                        name="coefficient"
+                        value={matter.coefficient}
+                        placeholder="Matter coefficient"
+                        data-group-index={groupIndex}
+                        data-matter-index={matterIndex}
+                        onChange={handleInputChange}
+                      />
+                      <div className="deleteButton" onClick={() => removeMatter(matter.name, groupIndex)}>
+                        <FontAwesomeIcon icon={faTrash} />
+                      </div>
+                    </div>
+                  </div>
+                );
+              })}
+          
+              <button
+                type="button"
+                onClick={() => addNewMatter(groupIndex)}
+                className="add-matter-btn" >
+                + Add Matter
+              </button>
+          
+              <button
+                type="button"
+                onClick={() => removeGroup(group.name)}
+                className="remove-group-btn" >
+                <FontAwesomeIcon icon={faTrash} />
+              </button>
+            </div>
           </div>
         </div>
         );
@@ -200,10 +286,11 @@ const FormWith = () => {
       <button type="submit" className="submit-btn">
         Submit
       </button>
-      {!showButtons ? (
-        <button type="button" onClick={addNewGroup} className="add-group-btn">
+      <button type="button" onClick={addNewGroup} className="add-group-btn">
           + Add Group
         </button>
+      {!showButtons ? (
+        null
       ) : (
         <div className="open-link">
           <OpenLink url={url} />
