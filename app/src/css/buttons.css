@@ -66,7 +66,7 @@
     
 
 /* Add pair button */
-#addButton {
+.addButton {
     background-color: #ffb703; 
     border: none;
     color: white;
@@ -81,7 +81,8 @@
 }
 
 
-#addButton:hover {
+.addButton:hover {
+    color: #555;
     background-color: #ACEDFF;
 }
 
@@ -89,4 +90,33 @@
 /* buttons of hide */
 .dropDown {
   cursor: pointer;
+}
+
+
+
+
+/* visual changes for the groups button */
+.groupStage {
+  background-color: #ff006e; 
+  border: none;
+  color: white;
+  padding: 10px 16px;
+  text-align: center;
+  text-decoration: none;
+  display: inline-block;
+  font-size: 16px;
+  margin: 4px 2px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+.groupStage:hover {
+  color: #555;
+  background-color: #ACEDFF;
+}
+
+
+.wrapperButtons {
+  display: flex;
+  align-items: center;
 }

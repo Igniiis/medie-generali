@@ -7,7 +7,7 @@ import '../src/css/App.css';
 
 interface Group {
   name: string,
-  coef: string;
+  coef: number;
   matters: Subject[];
 }
 
@@ -22,9 +22,12 @@ function GradeCalculatorWith() {
 
   // Retrieve the subjects and their coefficients from the URL
   const urlParams = new URLSearchParams(window.location.search);
-  const groupsParam = urlParams.get("groups");
+
+
+  const groupsParam  = urlParams.get("groups");
+
   const groups: Group[] = groupsParam
-    ? groupsParam.split(",").map((param) => {
+  ? groupsParam.split(",").map((param) => {
         //here are the value we get into param :
         //Science:math(1!5)|physic(4)~2
         //Human%20Sciences:English(2!5)|Art(3)~2!5
@@ -33,97 +36,97 @@ function GradeCalculatorWith() {
         const [name, subjects] = param.split(":");
 
         //we get the coeff of the group with the ~ separator
-        const [matters, numbCoeff] = subjects.split("~");
+        const [matterString, numbCoeff] = subjects.split("~");
         
         //we create the coeff as a Float
-        const coeff = parseFloat(numbCoeff.replace("!",".");
-  
-        //we get a tab of all the matters linked
-        const tabMatterString = matters.split("|");
-        
-        //TODO
-        //TO FINISH
+        let coef;
+        if(numbCoeff==null){
+          throw new Error('$number not set');
+        }
+        if (numbCoeff.includes("!")) {
+          coef = parseFloat(numbCoeff.replace("!", "."));
+        } else {
+          coef = parseFloat(numbCoeff);
+        }
 
-        //we get the values of the coeff
-        //we use the "$" splitter to get coeff and matter        
+        //we get a tab of all the matters linked
+        const tabMatterString = matterString.split("|");
+        
+        console.log(tabMatterString);
+        
 
         //we create all the the Matters 
         //in a tab of Matters
+        let matters:Subject[] = [];
+        tabMatterString.forEach((param) => {
+            //we get the values of the coeff
+            //we use the "$" splitter to get coeff and matter        
+            const [mattersName,mattersCoef] = param.split('$');
+
+            let coefMatter;
+            if(numbCoeff===null){
+              throw new Error('$number not set');
+            }
+            /*if (mattersCoef.includes("!")) {
+              coefMatter = parseFloat(mattersCoef.replace("!", "."));
+            } else {
+              coefMatter = parseFloat(mattersCoef);
+            }*/
+            console.log(mattersCoef);
+            
+
+            matters = [
+              ...matters,
+              {
+                name: mattersName,
+                coeff: 3
+              }
+            ];
+        })
 
         //we return the whole thing as a tab of group
-        return {name:name, coefficient:coeff, matters: mattMatters};
-      })
-    : [];
-
-  const subjectsParam = urlParams.get("subjects");
-  const subjects: Subject[] = subjectsParam
-    ? subjectsParam.split(",").map((param) => {
-        const [name, coeff] = param.split(":");
-        let cNumb: number;
-        if (coeff.includes("!")) {
-          cNumb = parseFloat(coeff.replace("!", "."));
-        } else {
-          cNumb = parseInt(coeff);
-        }
-        return { name, coeff: cNumb };
-      })
-    : [];
-
-  const groupsParam = urlParams.get('groups');
-  const groups: Group[] = groupsParam
-    ? groupsParam.split(",").map((param) => {
-
-        const [name, p] = param.split(":");
-
-        const [matters,coeff] = p.split("~");
-
-        const tabMatters = matters.split("!");
-
-        const filteredSubjects = subjects.filter(subject => tabMatters.includes(subject.name) );
-        
-        return {name:name,coef:coeff,matters:filteredSubjects};
+        return {name, coef, matters};
       })
     : [];
 
   // Define the state for the marks of each subject
-  const [marks, setMarks] = useState<{ [key: string]: string }>(
-    subjects.reduce((acc, subject) => ({ ...acc, [subject.name]: "" }), {})
-  );
+  const [marks, setMarks] = useState<{ [key: string]: string }>(() => {
+    const initialMarks: { [key: string]: string } = {};
+    groups.forEach(group => {
+      group.matters.forEach(subject => {
+        initialMarks[subject.name] = "";
+      });
+    });
+    return initialMarks;
+  });
+
 
   // Define the function to handle form submissions
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
-    // Calculate the final grade using the marks and coefficients
-    let totalGrade = 0;
     let totalCoeff = 0;
-    
-    groups.forEach(group => {
-      const {coef, matters} = group;
+    let totalPoints = 0;
+    groups.forEach((group) => {
       let groupCoeff = 0;
-      let groupGrade = 0;
-
-      matters.forEach(matter => {
-        const mark = parseFloat(marks[matter.name]);
-        groupGrade += mark*matter.coeff;
+      let groupPoints = 0;
+      group.matters.forEach((matter) => {
         groupCoeff += matter.coeff;
-      })
+        groupPoints += parseFloat(marks[matter.name])*matter.coeff;
+      });
+      totalCoeff += group.coef;
+      totalPoints += (groupPoints / groupCoeff)*group.coef;
+    });
+    
+    const finalGrade = totalPoints / totalCoeff;
 
-      const resultGroup = groupGrade/groupCoeff;
-
-      totalCoeff += parseFloat(coef);
-      totalGrade += resultGroup*parseFloat(coef);
-    })
-
-
-    const finalGrade = totalGrade / totalCoeff;
-    // Display the final grade
     alert(`Your final grade is ${finalGrade.toFixed(2)}`);
   };
 
   // Define the function to handle changes to the marks
   const handleMarkChange = (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value } = event.target;
+    
     setMarks({ ...marks, [name]: value });
   };
 

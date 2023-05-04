@@ -121,6 +121,7 @@ const FormWith = () => {
         }          
     
           url += group.name + ':';
+          t2 = false;
           group.matters.forEach((matter, matterIndex) => {
             if(t2){
               url+= '|';
@@ -158,6 +159,10 @@ const FormWith = () => {
   };
 
   const removeGroup = (name: string) => {
+    if (!window.confirm('Are you sure to delete the group '+name)) {
+      return;
+    }
+    
     const filteredValues = {
       groups: values.groups.filter((group) => group.name !== name)
     };
@@ -232,16 +237,25 @@ const FormWith = () => {
               onChange={handleInputChange}
               required
             />
-            <input
-              type="text"
-              name="coefficient"
-              value={group.coefficient}
-              placeholder="Group coefficient"
-              data-group-index={groupIndex}
-              onChange={handleInputChange}
-              required
-            />
-            <div>
+            <div className="coeff">
+              <input
+                type="text"
+                name="coefficient"
+                value={group.coefficient}
+                placeholder="Group coefficient"
+                data-group-index={groupIndex}
+                onChange={handleInputChange}
+                required
+              />
+
+                <button
+                  type="button"
+                  onClick={() => removeGroup(group.name)}
+                  className="deleteButton groupStage" >
+                  <FontAwesomeIcon icon={faTrash} />
+                </button>
+              </div>
+              <div>
               {group.matters.map((matter, matterIndex) => {
                 return (
                   <div key={matterIndex}>
@@ -281,27 +295,23 @@ const FormWith = () => {
               <button
                 type="button"
                 onClick={() => addNewMatter(groupIndex)}
-                className="add-matter-btn" >
+                className="addButton" >
                 + Add Matter
               </button>
           
-              <button
-                type="button"
-                onClick={() => removeGroup(group.name)}
-                className="remove-group-btn" >
-                <FontAwesomeIcon icon={faTrash} />
-              </button>
             </div>
           </div>
         </div>
         );
       })}
-      <button type="submit" className="submit-btn">
-        Submit
-      </button>
-      <button type="button" onClick={addNewGroup} className="add-group-btn">
-          + Add Group
+      <div className="wrapperButtons">
+        <button type="button" onClick={addNewGroup} className="groupStage">
+            + Add Group
         </button>
+        <button type="submit" className="submit-btn">
+          Submit
+        </button>
+        </div>
       {!showButtons ? (
         null
       ) : (

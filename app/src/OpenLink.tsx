@@ -17,7 +17,7 @@ function OpenLink({url} : OpenLinkProps){
   return (
     <div>
         <div className="linkContainer">
-          <a href={url} className="linkButton" type="submit">Open calculator</a>
+          <a href={url} target="_blank" className="linkButton" type="submit">Open calculator</a>
         </div>
         <div className="copyContainer">
           <input id="copyShowing" type="text" value={startUrl+url} readOnly />

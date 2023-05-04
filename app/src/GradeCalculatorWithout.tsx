@@ -1,11 +1,6 @@
 import React, { useState } from "react";
 import '../src/css/App.css';
 
-interface Group {
-  name: string,
-  coef: string;
-  matters: Subject[];
-}
 
 interface Subject {
   name: string;

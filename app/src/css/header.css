@@ -1,51 +1,64 @@
-/* Reset default styles */
+/* Style the header */
+header {
+  margin-top: 10%;
+  background-color: #faedcd;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  padding: 12px;
+  margin-bottom: 8%;
+  border-radius: 10px;
+}
+  
+/* Style the navigation */
+nav .topList {
+  list-style: none;
+  display: flex;
+}
+  
+nav .topLine {
+  margin-left: 10px;
+  margin-right: 10px;
+  position: relative; /* Add this rule to make child element position relative to parent */
+}
 
+nav a {
+  text-decoration: none;
+  color: #212529;
+  font-size: 18px;
+  font-weight: 500;
+  transition: color 0.3s ease;
+}
   
-  /* Style the header */
-  header {
-    margin-top: 10%;
-    background-color: #faedcd;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-    padding: 20px;
-    margin-bottom: 40px;
-    border-radius: 10px;
-  }
-  
-  /* Style the navigation */
-  nav .topList {
-    list-style: none;
-    display: flex;
-  }
-  
-  nav .topLine {
-    margin-right: 20px;
-  }
-  
-  nav a {
-    text-decoration: none;
-    color: #212529;
-    font-size: 18px;
-    font-weight: 500;
-    transition: color 0.3s ease;
-  }
-  
-  nav a:hover {
-    color: #007BFF;
-  }
+nav a:hover {
+  color: #007BFF;
+}
 
-
-  /* sublist */
-  .show:hover ul.list-categories{
-    max-height: inherit;
-    opacity: 1;
-  }
+/* sublist */
+.show:hover ul.list-categories{
+  max-height: inherit;
+  opacity: 1;
+}
   
-  .list-categories{
-    list-style-type: none;
-    padding: 0px;
-    margin: 0px;
-    max-height: 0px;
-    opacity: 0;
-    overflow: hidden;
-    transition: opacity 300ms ease;
-  }
+.list-categories {
+  padding-right:42px;
+  background: linear-gradient(to bottom,#faedcd, #f7e8c2);
+  border-radius: 3%;
+  position: absolute;
+  list-style-type: none;
+  max-height: 20px;
+  opacity: 0;
+  overflow: hidden;
+  transition: opacity 600ms ease;
+}
+
+.list-categories li{
+  border:#212529;
+  border-radius: 4px;
+  margin-top: 11%;
+}
+
+.list-categories a {
+  display: block; /* Add this rule to make the entire list item clickable */
+  padding: 8px; /* Add some padding to the list item for spacing */
+  width: max-content;
+}
+

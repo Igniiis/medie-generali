@@ -115,7 +115,7 @@ const FormWithout = () => {
         );
       })}
       <div>
-        <button type="button" id="addButton" onClick={addNewPair}>Add Matter</button>
+        <button type="button" className="addButton" onClick={addNewPair}>Add Matter</button>
         <button type="submit" >Generate</button>
       </div>
 
