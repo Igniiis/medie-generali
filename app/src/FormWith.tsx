@@ -103,7 +103,8 @@ const FormWith = () => {
       
       if(verif){
         let url = '';
-        let t = false;
+        let t1 = false;
+        let t2 = false;
         let groupUrl = '';
         let matterUrl = '';
 
@@ -113,19 +114,27 @@ const FormWith = () => {
         //?page=calculator&groups=Science:math(1!5)|physic(4)~2,Human%20Sciences:English(2!5)|Art(3)~2!5
 
         values.groups.forEach((group, groupIndex) => {
+        if(t1){
+          url+= ',';
+        }else{
+          t1=true;
+        }          
+    
+          url += group.name + ':';
           group.matters.forEach((matter, matterIndex) => {
-            if(t){
-              url+= ',';
+            if(t2){
+              url+= '|';
             }else{
-              t=true;
+              t2=true;
             }
-            url += group.name + '-' + matter.name + ":" + matter.coefficient.replace(',','!').replace('.','!');
+            url += matter.name + "(" + matter.coefficient.replace(',','!').replace('.','!') + ")";
           });
+          url += '~' + group.coefficient;
         });
 
         const currentUrl = window.location.href;
 
-        url = '?page=calculator&subjects=' + url;
+        url = '?page=calculator&groups=' + url;
 
         setUrlLoad(url);
 
@@ -221,7 +230,8 @@ const FormWith = () => {
               placeholder="Group name"
               data-group-index={groupIndex}
               onChange={handleInputChange}
-              />
+              required
+            />
             <input
               type="text"
               name="coefficient"
@@ -229,7 +239,8 @@ const FormWith = () => {
               placeholder="Group coefficient"
               data-group-index={groupIndex}
               onChange={handleInputChange}
-              />
+              required
+            />
             <div>
               {group.matters.map((matter, matterIndex) => {
                 return (
@@ -244,6 +255,7 @@ const FormWith = () => {
                       data-group-index={groupIndex}
                       data-matter-index={matterIndex}
                       onChange={handleInputChange}
+                      required
                     />
                     <label className="subTitle" htmlFor={`coeff_${matterIndex}`}>Matter's coefficient:</label>
                     <div className="coeff">
@@ -256,6 +268,7 @@ const FormWith = () => {
                         data-group-index={groupIndex}
                         data-matter-index={matterIndex}
                         onChange={handleInputChange}
+                        required
                       />
                       <div className="deleteButton" onClick={() => removeMatter(matter.name, groupIndex)}>
                         <FontAwesomeIcon icon={faTrash} />
