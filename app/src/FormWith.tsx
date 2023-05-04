@@ -111,7 +111,7 @@ const FormWith = () => {
         //TODO
         //verif GradeCalculatorWith to respect THIS url + verif the generation of this specific url
         //group url
-        //?page=calculator&groups=Science:math(1!5)|physic(4)~2,Human%20Sciences:English(2!5)|Art(3)~2!5
+        //?page=calculator&groups=Science:math$1!5|physic$4~2,Human%20Sciences:English$2!5|Art$3~2!5
 
         values.groups.forEach((group, groupIndex) => {
         if(t1){
@@ -127,7 +127,7 @@ const FormWith = () => {
             }else{
               t2=true;
             }
-            url += matter.name + "(" + matter.coefficient.replace(',','!').replace('.','!') + ")";
+            url += matter.name + "$" + matter.coefficient.replace(',','!').replace('.','!');
           });
           url += '~' + group.coefficient;
         });
