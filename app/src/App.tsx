@@ -28,8 +28,10 @@ function App() {
       }else{
         return <GradeCalculatorWith />;
       }
-      case 'search':
-        return <Search />;
+    case 'search':
+      return <Search />;
+    case null:
+      return <Home />  
     default:      
       return <Error />;
   }  

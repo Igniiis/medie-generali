@@ -23,7 +23,7 @@ const Home = () => {
           <br/>
           <br/>
           You can either create yourself a generator of average grade where you will choose yourself the differents matters and their coefficents. 
-          <br/>Or you can use a link someone gave you to already all setup, and so you'll just have to put your grades and find out your average.
+          <br/>Or you can use a link someone gave you with already everything setup, and so you'll just have to put your grades and find out your average.
           </p>
         </div>
     </div>

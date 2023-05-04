@@ -231,6 +231,7 @@ const FormWith = () => {
               id={`group_${groupIndex}`}
               type="text"
               name="name"
+              pattern="[^:|!?=~]*"
               value={group.name}
               placeholder="Group name"
               data-group-index={groupIndex}
@@ -239,7 +240,7 @@ const FormWith = () => {
             />
             <div className="coeff">
               <input
-                type="text"
+                type="number"
                 name="coefficient"
                 value={group.coefficient}
                 placeholder="Group coefficient"
@@ -263,6 +264,7 @@ const FormWith = () => {
                     <input
                       id={`matter_${matterIndex}`}
                       type="text"
+                      pattern="[^:|!?=~]*"
                       name="name"
                       value={matter.name}
                       placeholder="Matter name"
@@ -275,7 +277,7 @@ const FormWith = () => {
                     <div className="coeff">
                       <input
                         id={`coeff_${matterIndex}`}
-                        type="text"
+                        type="number"
                         name="coefficient"
                         value={matter.coefficient}
                         placeholder="Matter coefficient"
