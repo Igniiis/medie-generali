@@ -109,7 +109,7 @@ const FormWith = () => {
         let matterUrl = '';
 
         //TODO
-        //update GradeCalculatorWith to respect THIS url + finish the generation of this specific url
+        //verif GradeCalculatorWith to respect THIS url + verif the generation of this specific url
         //group url
         //?page=calculator&groups=Science:math(1!5)|physic(4)~2,Human%20Sciences:English(2!5)|Art(3)~2!5
 
