@@ -17,8 +17,44 @@ interface Subject {
 }
 
 function GradeCalculatorWith() {
+  // LINK TO RESPECT
+  //?page=calculator&groups=Science:math$1!5|physic$4~2,Human%20Sciences:English$2!5|Art$3~2!5
+
   // Retrieve the subjects and their coefficients from the URL
   const urlParams = new URLSearchParams(window.location.search);
+  const groupsParam = urlParams.get("groups");
+  const groups: Group[] = groupsParam
+    ? groupsParam.split(",").map((param) => {
+        //here are the value we get into param :
+        //Science:math(1!5)|physic(4)~2
+        //Human%20Sciences:English(2!5)|Art(3)~2!5
+
+        //we get the the name of the of the group + the subjects linked 
+        const [name, subjects] = param.split(":");
+
+        //we get the coeff of the group with the ~ separator
+        const [matters, numbCoeff] = subjects.split("~");
+        
+        //we create the coeff as a Float
+        const coeff = parseFloat(numbCoeff.replace("!",".");
+  
+        //we get a tab of all the matters linked
+        const tabMatterString = matters.split("|");
+        
+        //TODO
+        //TO FINISH
+
+        //we get the values of the coeff
+        //we use the "$" splitter to get coeff and matter        
+
+        //we create all the the Matters 
+        //in a tab of Matters
+
+        //we return the whole thing as a tab of group
+        return {name:name, coefficient:coeff, matters: mattMatters};
+      })
+    : [];
+
   const subjectsParam = urlParams.get("subjects");
   const subjects: Subject[] = subjectsParam
     ? subjectsParam.split(",").map((param) => {
