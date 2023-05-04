@@ -10,11 +10,11 @@
                 <li class='topLine'><a href='./?page=home'>Home</a></li>
                 
                 <div class='show'>
-                <li class='topLine'><a id="generator">Create a grade calculator</a></li>
-                <ul class='list-categories'>
-                    <li><a href="./?page=generator!with">with groups</a></li>
-                    <li><a href="./?page=generator!without">without groups</a></li>
-                </ul>
+                    <li class='topLine'><a id="generator">Create a grade calculator</a></li>
+                    <ul class='list-categories'>
+                        <li><a href="./?page=generator!with">with groups</a></li>
+                        <li><a href="./?page=generator!without">without groups</a></li>
+                    </ul>
                 </div>
                 <li class='topLine'><a href="./?page=search">Open a grade</a></li>
             </ul>
@@ -22,61 +22,150 @@
         </header>
 
         <form class="form-with">
-            <div key={groupIndex}>
-            <div class="dropDown" onclick="show(1)">
-                <span id="eye_1" style="display: block;"> O </span>
-                <span id="eyed_1" style="display: none;"> I </span>
-            </div>
-            <div class="groupWrapper" id="tt_1">
-                <label for="group_1">Group:</label>
+            <div key=1>
+                <div class="dropDown" onclick="show(1)">
+                    <span id="eye_1" style="display: block;"> O </span>
+                    <span id="eyed_1" style="display: none;"> I </span>
+                </div>
+                <div class="groupWrapper" id="tt_1">
+                    <label for="group_1">Group:</label>
+                    
+                    <input
+                    value="human Sciences"
+                    class="GroupName"
+                    id="group_1"
+                    type="text"
+                    name="name"
+                    placeholder="Group name"
+                    />
+                    <input
+                    value="2"
+                    type="text"
+                    name="coefficient"
+                    placeholder="Group coefficient"
+                    />
+                    <div>
+                        <div key=1>
+                            <label class="subTitle" for="matter_11">Matter's name:</label>
+                            <input
+                                value="art"
+                                id="matter_11"
+                                type="text"
+                                name="name"
+                                placeholder="Matter name"
+                            />
+                            <label class="subTitle" for="coeff_11">Matter's coefficient:</label>
+                            <div class="coeff">
+                            <input
+                                value="3"
+                                id="coeff_11"
+                                type="text"
+                                name="coefficient"
+                                placeholder="Matter coefficient"
+                            />
+                            <div class="deleteButton">
+                                trash
+                            </div>
+                            </div>
+                        </div>
+                    <button
+                        type="button"
+                        class="add-matter-btn" >
+                        + Add Matter
+                    </button>
                 
-                <input
-                class="GroupName"
-                id="group_1"
-                type="text"
-                name="name"
-                placeholder="Group name"
-                />
-                <input
-                type="text"
-                name="coefficient"
-                placeholder="Group coefficient"
-                />
-                <div>
-                    <div key={matterIndex}>
-                        <label class="subTitle" for="matter_1">Matter's name:</label>
-                        <input
-                        id="matter_1"
-                        type="text"
-                        name="name"
-                        placeholder="Matter name"
-                        />
-                        <label class="subTitle" for="coeff_1">Matter's coefficient:</label>
-                        <div class="coeff">
-                        <input
-                            id="coeff_1"
-                            type="text"
-                            name="coefficient"
-                            placeholder="Matter coefficient"
-                        />
-                        <div class="deleteButton">
-                            trash
-                        </div>
-                        </div>
+                    <button
+                        type="button"
+                        class="remove-group-btn" >
+                        trash
+                    </button>
                     </div>
-                <button
-                    type="button"
-                    class="add-matter-btn" >
-                    + Add Matter
-                </button>
-            
-                <button
-                    type="button"
-                    class="remove-group-btn" >
-                    trash
-                </button>
                 </div>
             </div>
+
+            <div key=2>
+                <div class="dropDown" onclick="show(2)">
+                    <span id="eye_2" style="display: block;"> O </span>
+                    <span id="eyed_2" style="display: none;"> I </span>
+                </div>
+                <div class="groupWrapper" id="tt_2">
+                    <label for="group_2">Group:</label>
+                    
+                    <input
+                    value="Sciences"
+                    class="GroupName"
+                    id="group_2"
+                    type="text"
+                    name="name"
+                    placeholder="Group name"
+                    />
+                    <input
+                    value="3"
+                    type="text"
+                    name="coefficient"
+                    placeholder="Group coefficient"
+                    />
+                    <div>
+                        <div key=1>
+                            <label class="subTitle" for="matter_12">Matter's name:</label>
+                            <input
+                            value="math"
+                            id="matter_12"
+                            type="text"
+                            name="name"
+                            placeholder="Matter name"
+                            />
+                            <label class="subTitle" for="coeff_12">Matter's coefficient:</label>
+                            <div class="coeff">
+                            <input
+                                value="2"
+                                id="coeff_12"
+                                type="text"
+                                name="coefficient"
+                                placeholder="Matter coefficient"
+                            />
+                            <div class="deleteButton">
+                                trash
+                            </div>
+                            </div>
+                        </div>
+
+                        <div key=2>
+                            <label class="subTitle" for="matter_22">Matter's name:</label>
+                            <input
+                                value="Physic"
+                                id="matter_22"
+                                type="text"
+                                name="name"
+                                placeholder="Matter name"
+                            />
+                            <label class="subTitle" for="coeff_22">Matter's coefficient:</label>
+                            <div class="coeff">
+                            <input
+                                value="2.5"
+                                id="coeff_22"
+                                type="text"
+                                name="coefficient"
+                                placeholder="Matter coefficient"
+                            />
+                            <div class="deleteButton">
+                                trash
+                            </div>
+                            </div>
+                        </div>
+                    <button
+                        type="button"
+                        class="add-matter-btn" >
+                        + Add Matter
+                    </button>
+                
+                    <button
+                        type="button"
+                        class="remove-group-btn" >
+                        trash
+                    </button>
+                    </div>
+                </div>
             </div>
         <button type="submit" class="submit-btn">
             Submit
@@ -91,21 +180,19 @@
 
 
 <script>
-    function show(nb){
+    function show(nb)
+    {
         var x = document.getElementById("tt_"+nb);
         var view = "";
-        var antiView = "";
         if (x.style.display === "none") {
             view = "block";
-            antiView = "none";
+            document.getElementById("eyed_"+nb).style.display = "none";
         } else {
             view = "none";
-            antiView = "block";
+            document.getElementById("eyed_"+nb).style.display = "block";
         }
-
 
         x.style.display = view;
         document.getElementById("eye_"+nb).style.display = view;
-        document.getElementById("eyed_"+nb).style.display = antiView;
     }
 </script>
