@@ -67,19 +67,20 @@ function GradeCalculatorWith() {
             if(numbCoeff===null){
               throw new Error('$number not set');
             }
-            /*if (mattersCoef.includes("!")) {
+            if (mattersCoef.includes("!")) {
               coefMatter = parseFloat(mattersCoef.replace("!", "."));
             } else {
               coefMatter = parseFloat(mattersCoef);
-            }*/
-            console.log(mattersCoef);
+            }
+
+            console.log(mattersName + coefMatter);
             
 
             matters = [
               ...matters,
               {
                 name: mattersName,
-                coeff: 3
+                coeff: coefMatter
               }
             ];
         })
@@ -111,8 +112,10 @@ function GradeCalculatorWith() {
       let groupCoeff = 0;
       let groupPoints = 0;
       group.matters.forEach((matter) => {
-        groupCoeff += matter.coeff;
-        groupPoints += parseFloat(marks[matter.name])*matter.coeff;
+        if(matter.coeff!=0){
+          groupCoeff += matter.coeff;
+          groupPoints += parseFloat(marks[matter.name])*matter.coeff;
+        }
       });
       totalCoeff += group.coef;
       totalPoints += (groupPoints / groupCoeff)*group.coef;

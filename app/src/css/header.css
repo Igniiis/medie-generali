@@ -41,7 +41,7 @@ nav a:hover {
 .list-categories {
   padding-right:42px;
   background: linear-gradient(to bottom,#faedcd, #f7e8c2);
-  border-radius: 3%;
+  border-radius: 10%;
   position: absolute;
   list-style-type: none;
   max-height: 20px;
@@ -52,7 +52,6 @@ nav a:hover {
 
 .list-categories li{
   border:#212529;
-  border-radius: 4px;
   margin-top: 11%;
 }
 

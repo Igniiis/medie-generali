@@ -5,6 +5,7 @@
 
 /* Click Link button */
 .linkButton {
+  margin-top: 4%;
     display: inline-block;
     padding: 10px 20px;
     background-color: #0077cc;
@@ -22,27 +23,40 @@
     background-color: #005fa3;
   }
 
+
+  .linkContainer {
+    display: flex;
+    align-items: center;
+  }
+
 /* Copy link button */
 
 .copyContainer {
+    margin-top: 4%;
     display: flex;
     align-items: center;
   }
   
   #copyShowing {
+    height: max-content;
     flex: 1;
     background-color: #f0f0f0;
     color: #555;
     border: none;
     padding: 8px;
     margin: 0;
+    border-radius: 5px 0px 0px 5px;
   }
   
   .copy-button {
+    border-radius: 0px 12px 12px 0px;
     background-color: #007bff;
     color: #fff;
-    border: none;
-    padding: 8px;
+    border: none; 
+    padding-left: 4px;
+    padding-right: 8px;
+    padding-top: 5px;
+    padding-bottom: 5px;
     margin: 0;
     cursor: pointer;
     vertical-align: middle;
@@ -55,6 +69,7 @@
   .copy-button:focus {
     outline: none;
   }
+  
   
   .grayTextBox {
     color: #ccc;
@@ -87,13 +102,6 @@
 }
 
 
-/* buttons of hide */
-.dropDown {
-  cursor: pointer;
-}
-
-
-
 
 /* visual changes for the groups button */
 .groupStage {
@@ -117,6 +125,7 @@
 
 
 .wrapperButtons {
+  margin-top:7% ;
   display: flex;
   align-items: center;
 }

@@ -62,3 +62,20 @@ footer {
     }
   }
   
+
+  .socials {
+    display: flex;
+    justify-content: center;
+    gap: 10px;
+  }
+  
+  .socials a {
+    color: #333;
+    font-size: 24px;
+    transition: color 0.3s;
+  }
+  
+  .socials a:hover {
+    color: #007bff;
+  }
+  

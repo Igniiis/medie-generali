@@ -22,7 +22,55 @@
 
 
 
-/* Visuel group's name */
-.GroupName {
-    background-color: transparent;
+/* Visual of title of groups */
+.dropDown {
+    display: flex;
+    align-items: center;
 }
+
+.chevron {
+    margin-left: auto;
+    cursor: pointer;
+}
+
+.chevron .up{
+    background-color: #e76f51;
+    padding: 8px 10px;
+    border-radius: 15px;
+}
+
+.chevron .left{
+    background-color: #e76f51;
+    padding: 10px 13px;
+    border-radius: 15px;
+}
+
+.groupTitle {
+    height: fit-content;
+    cursor: pointer;
+    font-size:150%;
+    font-weight: bolder;
+}
+
+
+
+/* get each group a border */
+.borderGroup {
+    border-bottom: 1px solid;
+    margin-top: 4%;
+    margin-bottom: 4%;
+}
+
+
+
+/* Bigger visual for group info */
+.groupLabel {
+    font-size: 110%;
+    color: black;
+}
+
+.groupName {
+    margin-top: 3%;
+    font-size:140%;
+    font-weight: bolder;
+  }

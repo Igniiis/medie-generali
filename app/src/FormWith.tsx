@@ -3,8 +3,8 @@ import '../src/css/buttons.css';
 import OpenLink from "./OpenLink";
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { faTrash } from '@fortawesome/free-solid-svg-icons';
-import { faEyeSlash } from '@fortawesome/free-solid-svg-icons';
-import { faEye } from '@fortawesome/free-solid-svg-icons';
+import { faChevronUp } from '@fortawesome/free-solid-svg-icons';
+import { faChevronLeft } from '@fortawesome/free-solid-svg-icons';
 import '../src/css/form.css';
 
 interface Matter {
@@ -105,11 +105,7 @@ const FormWith = () => {
         let url = '';
         let t1 = false;
         let t2 = false;
-        let groupUrl = '';
-        let matterUrl = '';
 
-        //TODO
-        //verif GradeCalculatorWith to respect THIS url + verif the generation of this specific url
         //group url
         //?page=calculator&groups=Science:math$1!5|physic$4~2,Human%20Sciences:English$2!5|Art$3~2!5
 
@@ -205,12 +201,15 @@ const FormWith = () => {
     setShowButtons(false);
   };
 
-  const switchVisibility = (groupIndex:number) => {
-    values.groups[groupIndex].visible = !values.groups[groupIndex].visible;
+  const switchVisibility = (groupIndex:number,topText:boolean=false) => {
 
-    setValues({
-      ...values
-    });
+    if (!topText) {
+      values.groups[groupIndex].visible = !values.groups[groupIndex].visible;
+
+      setValues({
+        ...values
+      }); 
+    }
   }
   
 
@@ -219,12 +218,15 @@ const FormWith = () => {
       {values.groups.map((group, groupIndex) => {
         return ( 
         <div key={groupIndex}>
-          <div className="dropDown" onClick={() => switchVisibility(groupIndex)}>
-            <FontAwesomeIcon icon={faEyeSlash} style={{display : group.visible ? "block":"none"}}/>
-            <FontAwesomeIcon icon={faEye} style={{display : group.visible ? "none":"block"}}/>
+          <div className="dropDown">
+            <h2 className="groupTitle" onClick={() => switchVisibility(groupIndex)}>{(group.name==='')?'_':group.name}</h2>
+            <div className="chevron" onClick={() => switchVisibility(groupIndex)}>
+              <FontAwesomeIcon className="up" icon={faChevronUp} style={{display : group.visible ? "block":"none"}}/>
+              <FontAwesomeIcon className="left" icon={faChevronLeft} style={{display : group.visible ? "none":"block"}}/>
+            </div>
           </div>
           <div className="groupWrapper" style={{display : group.visible ? "block":"none"}}>
-            <label htmlFor={`group_${groupIndex}`}>Group:</label>
+            <label htmlFor={`group_${groupIndex}`} className="groupLabel">Group:</label>
             
             <input
               className="GroupName"
@@ -233,7 +235,7 @@ const FormWith = () => {
               name="name"
               pattern="[^:|!?=~]*"
               value={group.name}
-              placeholder="Group name"
+              placeholder="Group's name"
               data-group-index={groupIndex}
               onChange={handleInputChange}
               required
@@ -243,7 +245,7 @@ const FormWith = () => {
                 type="number"
                 name="coefficient"
                 value={group.coefficient}
-                placeholder="Group coefficient"
+                placeholder="Group's coefficient"
                 data-group-index={groupIndex}
                 onChange={handleInputChange}
                 required
@@ -260,27 +262,26 @@ const FormWith = () => {
               {group.matters.map((matter, matterIndex) => {
                 return (
                   <div key={matterIndex}>
-                    <label className="subTitle" htmlFor={`matter_${matterIndex}`}>Matter's name:</label>
+                    <label className="subTitle" htmlFor={`matter_${matterIndex}`}>Matter {matterIndex+1}:</label>
                     <input
                       id={`matter_${matterIndex}`}
                       type="text"
                       pattern="[^:|!?=~]*"
                       name="name"
                       value={matter.name}
-                      placeholder="Matter name"
+                      placeholder="Matter's name"
                       data-group-index={groupIndex}
                       data-matter-index={matterIndex}
                       onChange={handleInputChange}
                       required
                     />
-                    <label className="subTitle" htmlFor={`coeff_${matterIndex}`}>Matter's coefficient:</label>
                     <div className="coeff">
                       <input
                         id={`coeff_${matterIndex}`}
                         type="number"
                         name="coefficient"
                         value={matter.coefficient}
-                        placeholder="Matter coefficient"
+                        placeholder="Matter's coefficient"
                         data-group-index={groupIndex}
                         data-matter-index={matterIndex}
                         onChange={handleInputChange}
@@ -303,6 +304,8 @@ const FormWith = () => {
           
             </div>
           </div>
+          <div className="borderGroup">
+          </div>
         </div>
         );
       })}
@@ -311,7 +314,7 @@ const FormWith = () => {
             + Add Group
         </button>
         <button type="submit" className="submit-btn">
-          Submit
+          Generate
         </button>
         </div>
       {!showButtons ? (

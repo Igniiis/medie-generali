@@ -75,20 +75,11 @@ button[type="submit"] {
   border: none;
   border-radius: 4px;
   cursor: pointer;
-  margin-left: 50%;
+  margin-left: auto;
   transition: background-color 0.3s ease-in-out;
 }
 
 button[type="submit"]:hover {
   color: #555;
   background-color: #ACEDFF;
-}
-
-
-/* Add groups visual */
-
-.groupName {
-  margin-top: 3%;
-  font-size:140%;
-  font-weight: bolder;
 }

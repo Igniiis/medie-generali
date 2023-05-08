@@ -35,13 +35,15 @@ function GradeCalculatorWithout() {
     event.preventDefault();
 
     // Calculate the final grade using the marks and coefficients
-    const totalCoeff = subjects.reduce((acc, subject) => acc + subject.coeff, 0);
-    const totalGrade = subjects.reduce((acc, subject) => {
-      const mark = parseFloat(marks[subject.name]);
-      const coeff = subject.coeff;
+    let totalGrade = 0;
+    let totalCoeff = 0;
 
-      return isNaN(mark) ? acc : acc + mark * coeff;
-    }, 0);
+    subjects.forEach((subject) => {
+      if(subject.coeff!=0){
+        totalCoeff += subject.coeff;
+        totalGrade += parseFloat(marks[subject.name]) * subject.coeff;
+      }
+    })
 
     const finalGrade = totalGrade / totalCoeff;
 
@@ -61,7 +63,7 @@ function GradeCalculatorWithout() {
       {subjects.map((subject) => (
         <div key={subject.name}>
           <label htmlFor={subject.name} > {subject.name} ({subject.coeff}) </label>
-            <input type="number" name={subject.name} value={marks[subject.name]} onChange={handleMarkChange} />
+            <input type="number" name={subject.name} value={marks[subject.name]} onChange={handleMarkChange} required/>
           
         </div>
       ))}
